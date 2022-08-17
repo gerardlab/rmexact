@@ -23,3 +23,5 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Imports: 
     hwep (>= 2.0.0)
+Suggests: 
+    covr
