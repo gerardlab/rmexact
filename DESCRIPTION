@@ -1,0 +1,25 @@
+Package: rmexact
+Title: Exact Tests for Random Mating in Polyploids
+Version: 0.0.1
+Authors@R: 
+    c(person(given = "David",
+             family = "Gerard",
+             role = c("aut", "cre"),
+             email = "gerard.1787@gmail.com",
+             comment = c(ORCID = "0000-0001-9450-5023")),
+      person(given = "Karene",
+             family = "Matoka Nana",
+             role = c("aut"),
+             email = "kmatokanana448@gmail.com"),
+      person(given = "NSF DBI 2132247",
+             role = "fnd",
+             comment = "https://www.nsf.gov/awardsearch/showAward?AWD_ID=2132247")
+     )
+Description: Implements exact testing procedures for random mating in 
+    autopolyploids.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1
+Imports: 
+    hwep (>= 2.0.0)
