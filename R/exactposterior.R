@@ -1,9 +1,9 @@
 #'Integrating over posterior genotypes
 #'
-#'calculate the distribution of exact p-values as we sample the genotype 
-#'according to their posteriors. We iteratively sample ind genotypes from
-#'their posterior probabilities and calculate the exact p value from this sample
-#'
+#'@param gi0,.. Posterior probabilities
+#'@param B Number of samples
+#'@return calculate the exact p value from this sample
+#'@example
 genotypelikelihood <- function(gi0,gi1,gi2,gi3,gi4, B) {
   vecpb <- rep(NA, length = B) #create a vector of length to contain all p values generated from for loop
 for (i in 1:B) {
