@@ -6,6 +6,7 @@
 #'@example
 genotypelikelihood <- function(gi0,gi1,gi2,gi3,gi4, B) {
   vecpb <- rep(NA, length = B) #create a vector of length to contain all p values generated from for loop
+  yb <- rep(NA, length = B)
 for (i in 1:B) {
 samp <- sample(x = c(0,1,2,3,4), prob = c(gi0,gi1,gi2,gi3,gi4))
 yb[i] <- c(y0hat = samp[1], 
