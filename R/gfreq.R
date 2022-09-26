@@ -12,4 +12,3 @@ qvec[qvec < 0] <- 0
 qvec <- qvec / sum(qvec)
 return(qvec)
 }
-
