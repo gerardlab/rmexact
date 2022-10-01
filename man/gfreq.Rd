@@ -15,3 +15,7 @@ Genotype frequency.
 \description{
 Calculate genotype frequency from gametes frequencies
 }
+\examples{
+pvec <- c(0.1,0.4,0.5)
+gfreq(pvec)
+}

@@ -4,18 +4,21 @@
 \alias{rmchisq}
 \title{Calculate Chi-squared for tetraploid}
 \usage{
-rmchisq(pvec, log_p = FALSE, N)
+rmchisq(nvec, log_pvalue = FALSE)
 }
 \arguments{
-\item{pvec}{vector of length 3}
+\item{nvec}{vector of length 5}
 
-\item{log_p}{if the user desires to get the log of the p value}
-
-\item{N}{the sample size}
+\item{log_pvalue}{if the user desires to get the log of the p value}
 }
 \value{
-the p-value
+the p-value or the log of the p-value depending on log_pvalue
 }
 \description{
 Calculate Chi-squared for tetraploid
+}
+\examples{
+nvec <- c(2, 1, 2, 3, 0)
+rmchisq(nvec, log_pvalue = FALSE)
+hwep::rmlike(nvec = nvec, thresh = 0)$p_rm
 }

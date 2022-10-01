@@ -1,4 +1,4 @@
-#' Exact test for tetraploid random mating including the p-value
+#' Exact test for tetraploid random mating
 #'
 #' Conditions on sufficient statistics to calculate an exact p-value
 #' against the null of random mating.
@@ -13,8 +13,6 @@
 #'     (\code{FALSE})?
 #' @param frac A logical. Does \code{y} contain fractional genotypes (e.g.
 #'     because \code{y} is calculated by summing up posterior probabilities)?
-#' @param midpval A logical. Should we return the mid p-value (\code{TRUE}) or
-#'     not (\code{FALSE})?
 #'
 #' @author David Gerard and Karene Matoka Nana
 #'
@@ -36,15 +34,16 @@
 #' y <- y + runif(5)
 #' tetexact(y = y)
 #'
+#' devt
 #' @export
-tetexactmodified <- function(y, log_p = FALSE, frac = FALSE, midpval = FALSE) {
+chisqrli <- function(y, log_p = FALSE, frac = FALSE) {
   TOL <- sqrt(.Machine$double.eps)
   stopifnot(length(y) == 5)
   stopifnot(is.logical(log_p), length(log_p) == 1)
   stopifnot(is.logical(frac), length(frac) == 1)
-
+  
   n <- sum(y)
-
+  
   if (!frac) {
     umax <- min(n - y[[3]] - y[[1]], floor(y[[2]] / 2), floor((n - y[[3]] - y[[4]])/2), y[[5]])
     umin <- max(-y[[1]], ceiling((y[[3]] + y[[2]] - n)/2), ceiling(-y[[4]]/2), y[[3]] + y[[5]] - n)
@@ -54,7 +53,7 @@ tetexactmodified <- function(y, log_p = FALSE, frac = FALSE, midpval = FALSE) {
     umin <- max(-y[[1]], (y[[3]] + y[[2]] - n)/2, -y[[4]]/2, y[[3]] + y[[5]] - n)
     m <- floor(umax - umin) + 1
   }
-
+  
   stopifnot(m > 0)
   if (abs(m - 1) < TOL) {
     if (!log_p) {
@@ -63,8 +62,8 @@ tetexactmodified <- function(y, log_p = FALSE, frac = FALSE, midpval = FALSE) {
       return(0)
     }
   }
-
-  ## current y
+  
+  ## Get conditional distribution of counts
   cy <- c(y[[1]] + umax, y[[2]] - 2 * umax, y[[3]], y[[4]] + 2 * umax, y[[5]] - umax)
   hvec <- rep(NA_real_, length.out = m)
   hvec[[1]] <- condprob(cy)
@@ -74,20 +73,21 @@ tetexactmodified <- function(y, log_p = FALSE, frac = FALSE, midpval = FALSE) {
   }
   hsum <- log_sum_exp(hvec)
   hvec <- hvec - hsum
-
-  hobs <- condprob(y)
-  hobs <- hobs - hsum
-
-  if (!midpval) {
-    pval <- log_sum_exp(hvec[hvec <= hobs])
-  } else {
-    pval <- log_sum_exp(c(log(0.5) + hobs, hvec[hvec < hobs]))
+  
+  ## Go through loop again to calculate expecatation
+  cy <- c(y[[1]] + umax, y[[2]] - 2 * umax, y[[3]], y[[4]] + 2 * umax, y[[5]] - umax)
+  ecounts <- cy * exp(hvec[[1]])
+  for (i in 2:m) {
+    cy <- tetdown(cy)
+    ecounts <- ecounts + cy * exp(hvec[[i]])
   }
 
-
+  ## Chi-squared test and p-value
+  chisqstat <- sum((y - ecounts)^2/ecounts)
+  pval <- stats::pchisq(q = chisqstat, df = 2, lower.tail = FALSE, log.p = TRUE)
   if (!log_p) {
     pval <- exp(pval)
   }
-
+  
   return(pval)
 }
