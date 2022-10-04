@@ -79,8 +79,8 @@ chisqrli <- function(y, log_p = FALSE, frac = FALSE) {
   }
 
   ## Chi-squared test and p-value
-  chisqsquared <- sum((y - ek)^2/ek)
-  pval <- stats::pchisq(q = chisqsquared, df = 1, lower.tail = FALSE, log.p = TRUE)
+  X2 <- sum((y - ek)^2/ek)
+  pval <- stats::pchisq(q = X2, df = 1, lower.tail = FALSE, log.p = TRUE)
   if (!log_p) {
     pval <- exp(pval)
   }
