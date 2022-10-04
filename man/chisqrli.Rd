@@ -2,7 +2,7 @@
 % Please edit documentation in R/chisqrli.R
 \name{chisqrli}
 \alias{chisqrli}
-\title{Exact test for tetraploid random mating}
+\title{Chi-Squared based on Li Paper}
 \usage{
 chisqrli(y, log_p = FALSE, frac = FALSE)
 }
@@ -17,8 +17,8 @@ the number of individuals with genotype \code{k-1}.}
 because \code{y} is calculated by summing up posterior probabilities)?}
 }
 \description{
-Conditions on sufficient statistics to calculate an exact p-value
-against the null of random mating.
+Using Conditions on sufficient statistics to calculate the chi-squared
+p-value.
 }
 \details{
 If you have genotype likelihoods, I would first convert those to genotype
@@ -39,11 +39,6 @@ q <- c(0.4, 0.3, 0.2, 0.1, 0.0)
 y <- c(stats::rmultinom(n = 1, size = 200, prob = q))
 tetexact(y = y)
 
-## small change when using fractional counts
-y <- y + runif(5)
-tetexact(y = y)
-
-devt
 }
 \author{
 David Gerard and Karene Matoka Nana

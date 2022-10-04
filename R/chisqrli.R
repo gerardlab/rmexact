@@ -1,8 +1,9 @@
-#' Exact test for tetraploid random mating
+#' Chi-Squared based on Li Paper
 #'
-#' Conditions on sufficient statistics to calculate an exact p-value
-#' against the null of random mating.
+#' Using Conditions on sufficient statistics to calculate the chi-squared
+#' p-value.
 #'
+#
 #' If you have genotype likelihoods, I would first convert those to genotype
 #' posteriors (e.g. using \code{ldsep::gl_to_gp()}) to obtain \code{gp}, then
 #' run \code{y <- colSums(gp, na.rm = TRUE)}. Then use the \code{frac = TRUE}?
@@ -30,20 +31,15 @@
 #' y <- c(stats::rmultinom(n = 1, size = 200, prob = q))
 #' tetexact(y = y)
 #'
-#' ## small change when using fractional counts
-#' y <- y + runif(5)
-#' tetexact(y = y)
-#'
-#' devt
 #' @export
 chisqrli <- function(y, log_p = FALSE, frac = FALSE) {
   TOL <- sqrt(.Machine$double.eps)
   stopifnot(length(y) == 5)
   stopifnot(is.logical(log_p), length(log_p) == 1)
   stopifnot(is.logical(frac), length(frac) == 1)
-  
+
   n <- sum(y)
-  
+
   if (!frac) {
     umax <- min(n - y[[3]] - y[[1]], floor(y[[2]] / 2), floor((n - y[[3]] - y[[4]])/2), y[[5]])
     umin <- max(-y[[1]], ceiling((y[[3]] + y[[2]] - n)/2), ceiling(-y[[4]]/2), y[[3]] + y[[5]] - n)
@@ -53,7 +49,7 @@ chisqrli <- function(y, log_p = FALSE, frac = FALSE) {
     umin <- max(-y[[1]], (y[[3]] + y[[2]] - n)/2, -y[[4]]/2, y[[3]] + y[[5]] - n)
     m <- floor(umax - umin) + 1
   }
-  
+
   stopifnot(m > 0)
   if (abs(m - 1) < TOL) {
     if (!log_p) {
@@ -62,7 +58,7 @@ chisqrli <- function(y, log_p = FALSE, frac = FALSE) {
       return(0)
     }
   }
-  
+
   ## Get conditional distribution of counts
   cy <- c(y[[1]] + umax, y[[2]] - 2 * umax, y[[3]], y[[4]] + 2 * umax, y[[5]] - umax)
   hvec <- rep(NA_real_, length.out = m)
@@ -73,7 +69,7 @@ chisqrli <- function(y, log_p = FALSE, frac = FALSE) {
   }
   hsum <- log_sum_exp(hvec)
   hvec <- hvec - hsum
-  
+
   ## Go through loop again to calculate expecatation
   cy <- c(y[[1]] + umax, y[[2]] - 2 * umax, y[[3]], y[[4]] + 2 * umax, y[[5]] - umax)
   ecounts <- cy * exp(hvec[[1]])
@@ -84,10 +80,10 @@ chisqrli <- function(y, log_p = FALSE, frac = FALSE) {
 
   ## Chi-squared test and p-value
   chisqstat <- sum((y - ecounts)^2/ecounts)
-  pval <- stats::pchisq(q = chisqstat, df = 2, lower.tail = FALSE, log.p = TRUE)
+  pval <- stats::pchisq(q = chisqstat, df = 1, lower.tail = FALSE, log.p = TRUE)
   if (!log_p) {
     pval <- exp(pval)
   }
-  
+
   return(pval)
 }

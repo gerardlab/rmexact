@@ -2,7 +2,7 @@
 % Please edit documentation in R/exactmodified.R
 \name{tetexactmodified}
 \alias{tetexactmodified}
-\title{Exact test for tetraploid random mating}
+\title{Exact test for tetraploid random mating including the p-value}
 \usage{
 tetexactmodified(y, log_p = FALSE, frac = FALSE, midpval = FALSE)
 }
@@ -15,6 +15,9 @@ the number of individuals with genotype \code{k-1}.}
 
 \item{frac}{A logical. Does \code{y} contain fractional genotypes (e.g.
 because \code{y} is calculated by summing up posterior probabilities)?}
+
+\item{midpval}{A logical. Should we return the mid p-value (\code{TRUE}) or
+not (\code{FALSE})?}
 }
 \description{
 Conditions on sufficient statistics to calculate an exact p-value
@@ -32,15 +35,11 @@ set.seed(1)
 p <- c(0.5, 0.3, 0.2)
 q <- stats::convolve(p, rev(p), type = "open")
 y <- c(stats::rmultinom(n = 1, size = 200, prob = q))
-tetexact(y = y)
+tetexactmodified(y = y, midpval = TRUE)
 
 # Generate data different from random mating
 q <- c(0.4, 0.3, 0.2, 0.1, 0.0)
 y <- c(stats::rmultinom(n = 1, size = 200, prob = q))
-tetexact(y = y)
-
-## small change when using fractional counts
-y <- y + runif(5)
 tetexact(y = y)
 
 }

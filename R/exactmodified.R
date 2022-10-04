@@ -25,15 +25,11 @@
 #' p <- c(0.5, 0.3, 0.2)
 #' q <- stats::convolve(p, rev(p), type = "open")
 #' y <- c(stats::rmultinom(n = 1, size = 200, prob = q))
-#' tetexact(y = y)
+#' tetexactmodified(y = y, midpval = TRUE)
 #'
 #' # Generate data different from random mating
 #' q <- c(0.4, 0.3, 0.2, 0.1, 0.0)
 #' y <- c(stats::rmultinom(n = 1, size = 200, prob = q))
-#' tetexact(y = y)
-#'
-#' ## small change when using fractional counts
-#' y <- y + runif(5)
 #' tetexact(y = y)
 #'
 #' @export

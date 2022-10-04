@@ -16,5 +16,6 @@
 #' @author David Gerard and Karene Matoka Nana
 #'
 #' @importFrom hwep simgl
+#' @importFrom stats pchisq
 #'
 "_PACKAGE"
