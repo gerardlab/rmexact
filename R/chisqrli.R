@@ -70,20 +70,19 @@ chisqrli <- function(y, log_p = FALSE, frac = FALSE) {
   hsum <- log_sum_exp(hvec)
   hvec <- hvec - hsum
 
-  ## Go through loop again to calculate expecatation
+  ## Go through loop again to calculate expectation
   cy <- c(y[[1]] + umax, y[[2]] - 2 * umax, y[[3]], y[[4]] + 2 * umax, y[[5]] - umax)
-  ecounts <- cy * exp(hvec[[1]])
+  ek <- cy * exp(hvec[[1]])
   for (i in 2:m) {
     cy <- tetdown(cy)
-    ecounts <- ecounts + cy * exp(hvec[[i]])
+    ek <- ek + cy * exp(hvec[[i]])
   }
 
   ## Chi-squared test and p-value
-  chisqstat <- sum((y - ecounts)^2/ecounts)
-  pval <- stats::pchisq(q = chisqstat, df = 1, lower.tail = FALSE, log.p = TRUE)
+  chisqsquared <- sum((y - ek)^2/ek)
+  pval <- stats::pchisq(q = chisqsquared, df = 1, lower.tail = FALSE, log.p = TRUE)
   if (!log_p) {
     pval <- exp(pval)
   }
-
   return(pval)
 }
