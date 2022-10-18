@@ -20,3 +20,5 @@ rmchisq <- function(nvec, log_pvalue = FALSE) {
   }
   return(result)
 }
+
+
