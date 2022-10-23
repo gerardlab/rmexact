@@ -1,25 +1,40 @@
 #' Universal conference
-#' @example
+#' @examples 
 #' set.seed(1)
 #' pvec <- c(1/3, 1/3, 1/3)
 #' n <- 100
 #' freq <- rmexact::gfreq(pvec = pvec)
-#' group1 <- c(rmultinom(n = 1, size = n/2, prob = freq))
-#' group2 <- c(rmultinom(n = 1, size = n/2, prob = freq))
-#' universal(group1 = as.vector(group1), group2 = as.vector(group2))
+#' nvec <- c(rmultinom(n = 1, size = n, prob = freq))
+#' nvec <- c(1000, 100, 0, 1000, 0)
+#' universal(nvec = nvec)
 ##'@export
-universal <- function(group1, group2, log_pvalue = FALSE) {
-  stopifnot(group1 == as.vector(group1))
-  stopifnot(group2 == as.vector(group2))
+universal <- function(nvec, log_pvalue = FALSE) {
+  ploidy <- length(nvec) - 1
+  mapply(0:ploidy, nvec, FUN = rep) |>
+    unlist() |>
+    sample(size = round(sum(nvec) / 2), replace = FALSE) |>
+    factor(levels = 0:ploidy) |>
+    table() |>
+    as.vector() ->
+    group1
+  group2 <- nvec - group1
+  
   mle1 <- hwep::rmlike(nvec = group1)$p
   qvec1 <- rmexact::gfreq(pvec = mle1)
   mle2 <- hwep::rmlike(nvec = group2)$p
   qvec2 <- rmexact::gfreq(pvec = mle2)
-  Tn <- prod(group1 * qvec2)/prod(group1 * qvec1)
-  Tnswap <- prod(group2 * qvec2)/prod(group2 * qvec1)
-  sn <- (Tn + Tnswap)/2
-  return(sn)
+  lrs1 <- dmultinom(x = group1, size = sum(group1), prob = qvec1, log = TRUE) - 
+    dmultinom(x = group1, size = sum(group1), prob = qvec2, log = TRUE)
+    
+  lrs2 <- dmultinom(x = group2, size = sum(group2), prob = qvec2, log = TRUE) -
+    dmultinom(x = group2, size = sum(group2), prob = qvec1, log = TRUE)
+  
+  lpval <- min(log(2) - log_sum_exp(c(lrs1, lrs2)), 0)
+  
+  if (!log_pvalue) {
+    lpval <- exp(lpval)
+  }
+  return(lpval)
 }
 
 
-universal(group1 = as.vector(group1), group2 = as.vector(group2))
