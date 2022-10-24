@@ -95,4 +95,37 @@ lpval <- min(lpval, 0)
 #' The test statistics have to be q1 and q2
 #' Maybe run the test in a loop, extracting the test statistics each iteration, 
 #' average the log of the test statistics, then calculate the p-value:
+plisttrial <- list(c(0.333, 0.333, 0.333),
+              c(0, 1, 0),
+              c(1/2, 0, 1/2),
+              c(0.1, 0.3, 0.6))
 
+nvectrial <- c(10, 100)
+seedvec <- seq_len(10)
+trialrmslrt <- expand.grid(p = plisttrial,
+                       n = nvectrial,
+                       seed = seedvec)
+for(i in seq_len(nrow(trialrmslrt))) {
+  set.seed(paramdf$seed[[i]])
+  p <- paramdf$p[[i]]
+  n <- paramdf$n[[i]]
+  freq <- rmexact::gfreq(pvec = p)
+  result <- c(rmultinom(n = 1, size = n, prob = freq))
+  teststatistics1 <- rmslrt(nvec, sprop = 0.5)$q1 #Extract the first test statistics
+  teststatistics2 <- rmslrt(nvec, sprop = 0.5)$q2 #Extract the second test statistics
+  avg <- log(q1 + q2) - log(2) #Average the log of the test statistics
+  lpval <- -stats::dmultinom(x = nvec2, prob = q1, log = TRUE) +
+    stats::dmultinom(x = nvec2, prob = q2, log = TRUE)
+}
+
+#Simple Test
+first <- c(2,5,7)
+second <- c(1,5,8)
+res1 <- log(first)
+res2 <- log(second)
+log(first + second) - log(2)
+
+#'Due to the failures of running universal, we may need to first run `rmslrt()`,
+#'inside a for loop, then extract the test statistics. I am thinking that I could 
+#'directly use the calculations used inside `universal()` to calculate the pvals.
+#'Or I would have to do it manually and then used that calculations. 
