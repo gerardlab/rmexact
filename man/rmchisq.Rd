@@ -21,4 +21,5 @@ Calculate Chi-squared for tetraploid
 nvec <- c(2, 1, 2, 3, 0)
 rmchisq(nvec, log_pvalue = FALSE)
 hwep::rmlike(nvec = nvec, thresh = 0)$p_rm
+
 }

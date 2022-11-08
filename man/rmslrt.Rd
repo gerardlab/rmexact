@@ -4,7 +4,7 @@
 \alias{rmslrt}
 \title{Split likelihood ratio test for random mating}
 \usage{
-rmslrt(nvec, sprop = 0.5, log_p = FALSE)
+rmslrt(nvec, sprop = 0.5, log_p = FALSE, nrep = 10)
 }
 \arguments{
 \item{nvec}{The vector of genotype counts}
@@ -24,7 +24,7 @@ nvec <- c(stats::rmultinom(n = 1, size = 100, prob = q))
 rmslrt(nvec, sprop = 0.5)
 
 q <- c(0.25, 0.2, 0.1, 0.2, 0.25)
-nvec <- c(stats::rmultinom(n = 1, size = 100, prob = q))
+nvec <- c(stats::rmultinom(n = 1, size = 50, prob = q))
 rmslrt(nvec, sprop = 0.5)
 
 }
