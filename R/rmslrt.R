@@ -3,7 +3,7 @@
 #' @param nvec The vector of genotype counts
 #' @param sprop The proportional split.
 #' @param log_p Should we return the log p-value?
-#'
+#' @param nrep Number of iterations
 #' @author David Gerard and Karene Matoka Nana
 #'
 #' @examples

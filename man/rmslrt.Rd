@@ -12,6 +12,8 @@ rmslrt(nvec, sprop = 0.5, log_p = FALSE, nrep = 10)
 \item{sprop}{The proportional split.}
 
 \item{log_p}{Should we return the log p-value?}
+
+\item{nrep}{Number of iterations}
 }
 \description{
 Split likelihood ratio test for random mating
