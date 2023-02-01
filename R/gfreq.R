@@ -8,9 +8,9 @@
 #' gfreq(pvec)
 #' @export
 gfreq <- function(pvec) {
-qvec <- stats::convolve(pvec, rev(pvec), type = "open")
-qvec[qvec < 0] <- 0
-qvec <- qvec / sum(qvec)
-return(qvec)
+  qvec <- stats::convolve(pvec, rev(pvec), type = "open")
+  qvec[qvec < 0] <- 0
+  qvec <- qvec / sum(qvec)
+  return(qvec)
 }
 

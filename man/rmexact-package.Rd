@@ -7,15 +7,16 @@
 \alias{rmexact}
 \title{Exact tests for random mating in autopolyploids.}
 \description{
-Right now, we only have an implementation for tetraploids. But we can
-account for genotype uncertainty through genotype posteriors.
-}
-\details{
 The main functions are
 \describe{
-\item{\code{\link{tetexact}()}}{Calculate the exact p-value when genotypes are known.}
-\item{\code{\link{tetgp}()}}{Calculate the fuzzy p-value when using genotype posteriors.}
-\item{\code{\link{vpv}()}}{Calculate the vacuumed p-value.}
+\item{\code{\link{tetexact}()}}{Exact test using sufficient statistics for random mating in autotetraploids when the genotypes are known.}
+\item{\code{\link{rmslrt}()}}{Exact test using the split likelihood ratio approach of Wasserman et al. (2020) for random mating in autopolyploids when genotypes are known.}
+\item{\code{\link{rmchisq}()}}{Chi-squared test for random mating in autopolyploids when genotypes are known.}
+}
+}
+\references{
+\itemize{
+\item{Wasserman, L., Ramdas, A., & Balakrishnan, S. (2020). Universal inference. \emph{Proceedings of the National Academy of Sciences}, 117(29), 16880-16890. \doi{10.1073/pnas.1922664117}}
 }
 }
 \author{
