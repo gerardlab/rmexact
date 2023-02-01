@@ -15,6 +15,9 @@ rmslrt(nvec, sprop = 0.5, log_p = FALSE, nrep = 10)
 
 \item{nrep}{Number of iterations}
 }
+\value{
+the p-value or the log of the p-value
+}
 \description{
 Split likelihood ratio test for random mating
 }
@@ -23,13 +26,10 @@ set.seed(1)
 p <- c(1/3, 1/3, 1/3)
 q <- stats::convolve(p, rev(p), type = "open")
 nvec <- c(stats::rmultinom(n = 1, size = 100, prob = q))
-rmslrt(nvec, sprop = 0.5)
+rmslrt(nvec, sprop = 0.5, nrep = 100)
 
 q <- c(0.25, 0.2, 0.1, 0.2, 0.25)
 nvec <- c(stats::rmultinom(n = 1, size = 50, prob = q))
 rmslrt(nvec, sprop = 0.5)
 
-}
-\author{
-David Gerard and Karene Matoka Nana
 }

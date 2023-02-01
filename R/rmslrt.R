@@ -4,7 +4,8 @@
 #' @param sprop The proportional split.
 #' @param log_p Should we return the log p-value?
 #' @param nrep Number of iterations
-#' @author David Gerard and Karene Matoka Nana
+#'
+#' @return the p-value or the log of the p-value
 #'
 #' @examples
 #' set.seed(1)
