@@ -40,7 +40,7 @@ tetdown <- function(y) {
 condprob <- function(y, log_p = TRUE) {
   stopifnot(length(y) == 5)
   stopifnot(is.logical(log_p), length(log_p) == 1)
-  cp <- lgamma(sum(y) + 1) - sum(lgamma(y + 1))
+  cp <- lgamma(sum(y) + 1) + y[[2]] * log(2) + y[[4]] * log(2) - sum(lgamma(y + 1))
   if (!log_p) {
     cp <- exp(cp)
   }
