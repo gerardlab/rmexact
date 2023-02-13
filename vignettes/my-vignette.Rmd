@@ -1,0 +1,79 @@
+---
+title: "Vignette for Tetraploid package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introduction
+
+This vignette covers the basic usage of the `rmexact` package. 
+This package was created to test for random mating in tetraploids. Tetraploids are organisms with 4 copies of chromosomes.Each section addresses a different methods. 3 functions are implemented in this package:
+
+ - function for calculating an exact p-value against the null of random mating using sufficient statistics.
+ - function for calculating the chi-squared p-value.
+ - function for calculation the exact p-value based on the split likelihood ratio test.
+ 
+```{r setup}
+library(rmexact)
+```
+
+
+# Testing for random matings
+
+## TETEXACT
+
+- `tetexact()`: This function will calculate the exact p-value using sufficient
+statistics. A vector containing the genotype counts should be inserted to run
+this function. If the genotype counts are fractional, set `frac = TRUE` to take
+it into account. If the user desires to obtain a log p-value, set `log_p = TRUE` to make it happen.  
+
+Below is an example: 
+```{r}
+res <- c(18, 44, 69, 53, 16) 
+tetexact(y = res)
+
+#Fractional genotype counts
+res1 <- c(18/2, 44/2, 69/2, 53/2, 16/2) 
+tetexact(y = res1, frac = TRUE)
+
+#Log p-value
+tetexact(y = res, log_p = TRUE)
+```
+## RMCHISQ
+
+- `rmchisqr()`: This function will calculate the chi-squared p-value. A vector containing the genotype counts should be inserted to run
+this function. If the user desires to obtain a log p-value, set `log_p = TRUE` to make it happen. 
+
+Below is an example:
+```{r}
+nvec <- c(2, 14, 54, 84, 46)
+rmchisq(nvec = nvec)
+
+#Log p-value
+rmchisq(nvec = nvec, log_p = TRUE)
+```
+
+## RMSLRT
+
+- `rmslrt()`: This function will calculate the p-value using the split likelihood ratio test. A vector containing the genotype counts, the proportional split, and the number of iterations should be inserted to run this function. If the genotype counts are fractional, set `frac = TRUE` to take it into account.If the user desires to obtain a log p-value, set `log_p = TRUE` to make it happen.
+
+Below is an example:
+```{r}
+nvec1 <- c(9, 21, 33, 20, 17)
+rmslrt(nvec = nvec1, sprop = 0.5, nrep = 100)
+
+#Log p-value
+rmslrt(nvec = nvec1, sprop = 0.5, nrep = 100, log_p = TRUE)
+```
+
+

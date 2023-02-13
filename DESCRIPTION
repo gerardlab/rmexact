@@ -27,4 +27,7 @@ RoxygenNote: 7.2.3
 Imports: 
     hwep (>= 2.0.0)
 Suggests: 
-    covr
+    covr,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
