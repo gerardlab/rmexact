@@ -178,7 +178,7 @@ tetexact <- function(y, log_p = FALSE, frac = FALSE) {
 #' vpv(pval2) ## vacuumed p-value
 #' }
 #'
-#' @export
+#' @noRd
 tetgp <- function(gp, nrep = 1000, log_p = FALSE) {
   TOL <- sqrt(.Machine$double.eps)
   stopifnot(ncol(gp) == 5)
@@ -213,7 +213,7 @@ tetgp <- function(gp, nrep = 1000, log_p = FALSE) {
 #' pvals <- runif(1000)
 #' vpv(pvals)
 #'
-#' @export
+#' @noRd
 vpv <- function(pvals) {
   pvals <- sort(pvals)
   n <- length(pvals)
