@@ -19,7 +19,11 @@ rmslrt(nvec, sprop = 0.5, log_p = FALSE, nrep = 10)
 the p-value or the log of the p-value
 }
 \description{
-Split likelihood ratio test for random mating
+The split likelihood ratio test involves dividing a sample into two
+subsamples, where the first subsample is used to estimate the parameters of
+the full model, and the second subsample is used to test the null hypothesis
+by comparing the likelihood of the data under the estimate and under the null
+hypothesis.
 }
 \examples{
 set.seed(1)

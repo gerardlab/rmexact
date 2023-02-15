@@ -13,7 +13,8 @@ gfreq(pvec)
 Genotype frequency.
 }
 \description{
-Calculate genotype frequency from gametes frequencies
+This is under the assumption of random mating where each frequency
+is generated through convolution.
 }
 \examples{
 pvec <- c(0.1,0.4,0.5)

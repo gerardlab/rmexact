@@ -2,7 +2,7 @@
 % Please edit documentation in R/chisqr.R
 \name{rmchisq}
 \alias{rmchisq}
-\title{Calculate Chi-squared for tetraploid}
+\title{Calculate Chi-squared to test for random mating for tetraploids}
 \usage{
 rmchisq(nvec, log_pvalue = FALSE)
 }
@@ -15,7 +15,8 @@ rmchisq(nvec, log_pvalue = FALSE)
 the p-value or the log of the p-value depending on log_pvalue
 }
 \description{
-Calculate Chi-squared for tetraploid
+If mating is completely random, then we expect the frequencies
+to follow:
 }
 \examples{
 nvec <- c(2, 1, 2, 3, 0)
