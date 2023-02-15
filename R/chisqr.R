@@ -1,4 +1,7 @@
-#' Calculate Chi-squared for tetraploid
+#' Calculate Chi-squared to test for random mating for tetraploids
+#'
+#' If mating is completely random, then we expect the frequencies
+#' to follow:
 #'
 #' @param nvec vector of length 5
 #' @param log_pvalue if the user desires to get the log of the p value

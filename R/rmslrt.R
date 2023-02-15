@@ -1,5 +1,12 @@
 #' Split likelihood ratio test for random mating
 #'
+#'
+#' The split likelihood ratio test involves dividing a sample into two
+#' subsamples, where the first subsample is used to estimate the parameters of
+#' the full model, and the second subsample is used to test the null hypothesis
+#' by comparing the likelihood of the data under the estimate and under the null
+#' hypothesis.
+#'
 #' @param nvec The vector of genotype counts
 #' @param sprop The proportional split.
 #' @param log_p Should we return the log p-value?
