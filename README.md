@@ -13,15 +13,15 @@ v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org
 coverage](https://codecov.io/gh/gerardlab/rmexact/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gerardlab/rmexact?branch=main)
 <!-- badges: end -->
 
-Exact tests for random mating in autopolyploids. Right now, we only have
-support for tetraploids. We allow for genotype uncertainty through the
-use of genotype likelihoods and fuzzy *p*-values. The main functions are
+Exact tests for random mating in autopolyploids. The main functions are
 
--   `tetexact()`: Exact test for random mating in autotetraploids when
-    the genotypes are known.
--   `tetgp()`: Exact test for random mating in autotetraploids using
-    genotype posteriors.
--   `vpv()`: Calculate the vacuumed *p*-value.
+- `tetexact()`: Exact test using sufficient statistics for random mating
+  in autotetraploids when the genotypes are known.
+- `rmslrt()`: Exact test using the split likelihood ratio approach of
+  Wasserman et al. (2020) for random mating in autopolyploids when
+  genotypes are known.
+- `rmchisq()`: Chi-squared test for random mating in autopolyploids when
+  genotypes are known.
 
 ## Installation
 
@@ -39,3 +39,10 @@ Please note that the rmexact project is released with a [Contributor
 Code of
 Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
+
+## References
+
+Wasserman, L., Ramdas, A., & Balakrishnan, S. (2020). Universal
+inference. *Proceedings of the National Academy of Sciences*, 117(29),
+16880-16890.
+[doi:10.1073/pnas.1922664117](https://doi.org/10.1073/pnas.1922664117)

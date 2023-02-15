@@ -40,7 +40,7 @@ tetdown <- function(y) {
 condprob <- function(y, log_p = TRUE) {
   stopifnot(length(y) == 5)
   stopifnot(is.logical(log_p), length(log_p) == 1)
-  cp <- lgamma(sum(y) + 1) - sum(lgamma(y + 1))
+  cp <- lgamma(sum(y) + 1) + y[[2]] * log(2) + y[[4]] * log(2) - sum(lgamma(y + 1))
   if (!log_p) {
     cp <- exp(cp)
   }
@@ -178,7 +178,7 @@ tetexact <- function(y, log_p = FALSE, frac = FALSE) {
 #' vpv(pval2) ## vacuumed p-value
 #' }
 #'
-#' @export
+#' @noRd
 tetgp <- function(gp, nrep = 1000, log_p = FALSE) {
   TOL <- sqrt(.Machine$double.eps)
   stopifnot(ncol(gp) == 5)
@@ -213,7 +213,7 @@ tetgp <- function(gp, nrep = 1000, log_p = FALSE) {
 #' pvals <- runif(1000)
 #' vpv(pvals)
 #'
-#' @export
+#' @noRd
 vpv <- function(pvals) {
   pvals <- sort(pvals)
   n <- length(pvals)
