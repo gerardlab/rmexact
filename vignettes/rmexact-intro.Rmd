@@ -1,0 +1,70 @@
+---
+title: "Introduction to the `{rmexact}` R Package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{rmexact-intro}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introduction
+
+This package contains three tests to evaluate the assumption of random mating in autotetraploids, which are organisms with four copies of homologous chromosomes. Let $y = (y_0, y_1, y_2, y_3, y_4)$ be the vector of genotype counts, where $y_k$ is the number of individuals in our sample with genotye $k$. Let $n = y_0 + y_1 + y_2 + y_3 + y_4$ be the sample size. Let $q = (q_0, q_1, q_2, q_3, q_4)$ be the genotype frequencies of the population. Let $p = (p_0, p_1, p_2)$ be the gamete frequencies, where $p_k$ is the proportion of gametes produced in the population with genotype $k$. This package evaluates the two models
+\[
+H_0: y \sim \text{Multinom}(n, p * p)\\
+H_A: y \sim \text{Multinom}(n, q)
+\]
+where "$*$" denotes discrete linear convolution, and $\text{Multinom}$ represents the multinomial distribution. This package takes three approaches:
+
+1. `tetexact()`: An exact test using sufficient statistics for tetraploids.
+2. `rmslrt()`: An exact test using the split likelihood ratio (Wasserman et al., 2020) for any even ploidy level.
+3. `rmchisq()`: A standard chi-squared test for any ploidy level.
+
+This vignette will cover these three tests. Let's load the package into R
+ 
+```{r setup}
+library(rmexact)
+```
+
+# An Exact Test Using Sufficient Statistics
+
+`tetexact()`: This function will calculate the exact $p$-value using sufficient
+statistics. A vector containing the genotype counts should be inserted to run
+this function. If the user desires to obtain a log $p$-value, set `log_p = TRUE` to make it happen.  
+
+Below is an example: 
+```{r}
+res <- c(18, 44, 69, 53, 16) 
+tetexact(y = res)
+```
+
+# An Exact Test Using the Split Likelihood Ratio
+
+`rmslrt()`: This function will calculate the $p$-value using the split likelihood ratio test. A vector containing the genotype counts, the proportional split, and the number of iterations should be inserted to run this function. If the user desires to obtain a log $p$-value, set `log_p = TRUE` to make it happen.
+
+Below is an example:
+```{r}
+nvec1 <- c(18, 44, 69, 53, 16) 
+rmslrt(nvec = nvec1, sprop = 0.5, nrep = 100)
+```
+
+# A Chi-squared Test
+
+`rmchisqr()`: This function will calculate the chi-squared $p$-value. A vector containing the genotype counts should be inserted to run this function. If the user desires to obtain a log $p$-value, set `log_p = TRUE` to make it happen. 
+
+Below is an example:
+```{r}
+nvec <- c(18, 44, 69, 53, 16) 
+rmchisq(nvec = nvec)
+```
+
+# References
+
+- Wasserman, L., Ramdas, A., & Balakrishnan, S. (2020). Universal inference. *Proceedings of the National Academy of Sciences*, 117(29), 16880-16890. doi:10.1073/pnas.1922664117.

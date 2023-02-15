@@ -1,15 +1,14 @@
-#' Calculate Chi-squared to test for random mating for tetraploids
+#' Calculate chi-squared test for random mating for autopolyploids.
 #'
-#' If mating is completely random, then we expect the frequencies
-#' to follow:
+#' Implements a chi-squared test for random mating for any ploidy level.
 #'
 #' @param nvec vector of length 5
 #' @param log_pvalue if the user desires to get the log of the p value
 #' @return the p-value or the log of the p-value depending on log_pvalue
 #' @examples
-#'nvec <- c(2, 1, 2, 3, 0)
-#'rmchisq(nvec, log_pvalue = FALSE)
-#'hwep::rmlike(nvec = nvec, thresh = 0)$p_rm
+#' nvec <- c(2, 1, 2, 3, 0)
+#' rmchisq(nvec, log_pvalue = FALSE)
+#' hwep::rmlike(nvec = nvec, thresh = 0)$p_rm
 #'
 #'@export
 rmchisq <- function(nvec, log_pvalue = FALSE) {

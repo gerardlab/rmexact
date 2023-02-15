@@ -1,7 +1,8 @@
-#' Calculate genotype frequency from gametes frequencies
+#' Calculate genotype frequencies from gamete frequencies
 #'
-#' This is under the assumption of random mating where each frequency
-#' is generated through convolution.
+#' These genotype frequencies are calculated  under the assumption of
+#' random mating where each frequency is generated through a convolution
+#' of the gamete frequencies.
 #'
 #' @param pvec A vector of length three (gamete frequencies) that sum to 1
 #'

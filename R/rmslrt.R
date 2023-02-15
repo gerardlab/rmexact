@@ -1,11 +1,7 @@
 #' Split likelihood ratio test for random mating
 #'
-#'
-#' The split likelihood ratio test involves dividing a sample into two
-#' subsamples, where the first subsample is used to estimate the parameters of
-#' the full model, and the second subsample is used to test the null hypothesis
-#' by comparing the likelihood of the data under the estimate and under the null
-#' hypothesis.
+#' Implements the split likelihood ratio test of Wasserman et al. (2020
+#' when testing for random mating in autopolyploids.
 #'
 #' @param nvec The vector of genotype counts
 #' @param sprop The proportional split.
@@ -15,6 +11,7 @@
 #' @return the p-value or the log of the p-value
 #'
 #' @examples
+#' \dontrun{
 #' set.seed(1)
 #' p <- c(1/3, 1/3, 1/3)
 #' q <- stats::convolve(p, rev(p), type = "open")
@@ -22,8 +19,14 @@
 #' rmslrt(nvec, sprop = 0.5, nrep = 100)
 #'
 #' q <- c(0.25, 0.2, 0.1, 0.2, 0.25)
-#' nvec <- c(stats::rmultinom(n = 1, size = 50, prob = q))
-#' rmslrt(nvec, sprop = 0.5)
+#' nvec <- c(stats::rmultinom(n = 1, size = 100, prob = q))
+#' rmslrt(nvec, sprop = 0.5, nrep = 100)
+#' }
+#'
+#' @references
+#' \itemize{
+#'   \item{Wasserman, L., Ramdas, A., & Balakrishnan, S. (2020). Universal inference. \emph{Proceedings of the National Academy of Sciences}, 117(29), 16880-16890. \doi{10.1073/pnas.1922664117}}
+#' }
 #'
 #' @export
 rmslrt <- function(nvec, sprop = 0.5, log_p = FALSE, nrep = 10) {

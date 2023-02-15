@@ -2,7 +2,7 @@
 % Please edit documentation in R/gfreq.R
 \name{gfreq}
 \alias{gfreq}
-\title{Calculate genotype frequency from gametes frequencies}
+\title{Calculate genotype frequencies from gamete frequencies}
 \usage{
 gfreq(pvec)
 }
@@ -13,8 +13,9 @@ gfreq(pvec)
 Genotype frequency.
 }
 \description{
-This is under the assumption of random mating where each frequency
-is generated through convolution.
+These genotype frequencies are calculated  under the assumption of
+random mating where each frequency is generated through a convolution
+of the gamete frequencies.
 }
 \examples{
 pvec <- c(0.1,0.4,0.5)
