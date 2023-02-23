@@ -41,6 +41,10 @@ remotes::install_github("dcgerard/rmexact")
 
 Please note that the rmexact project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
 
+## Acknowledgements
+
+This material is based upon work supported by the National Science Foundation under Grant No. 2132247.
+
 ## References
 
 Wasserman, L., Ramdas, A., & Balakrishnan, S. (2020). Universal inference. *Proceedings of the National Academy of Sciences*, 117(29), 16880-16890. [doi:10.1073/pnas.1922664117](https://doi.org/10.1073/pnas.1922664117)
