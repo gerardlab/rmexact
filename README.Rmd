@@ -19,7 +19,6 @@ knitr::opts_chunk$set(
 [![NSF-2132247](https://img.shields.io/badge/NSF-2132247-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=2132247)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![R-CMD-check](https://github.com/gerardlab/rmexact/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gerardlab/rmexact/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/gerardlab/rmexact/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gerardlab/rmexact?branch=main)
 [![DOI](https://zenodo.org/badge/525824572.svg)](https://zenodo.org/badge/latestdoi/525824572)
 <!-- badges: end -->
 
