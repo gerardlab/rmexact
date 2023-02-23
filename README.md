@@ -11,6 +11,7 @@ v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org
 [![R-CMD-check](https://github.com/gerardlab/rmexact/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gerardlab/rmexact/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/gerardlab/rmexact/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gerardlab/rmexact?branch=main)
+[![DOI](https://zenodo.org/badge/525824572.svg)](https://zenodo.org/badge/latestdoi/525824572)
 <!-- badges: end -->
 
 Exact tests for random mating in autopolyploids. The main functions are
